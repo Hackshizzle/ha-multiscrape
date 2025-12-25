@@ -34,3 +34,20 @@ multiscrape:
           - name: Release notes link
             select: "div.links:nth-child(3) > a:nth-child(1)"
             attribute: href
+ sensor:
+  - platform: rest
+    name: "AGSI+ Gasspeicher Deutschland"
+    resource: "https://agsi.gie.eu/api?country=DE"
+    scan_interval: 10800
+    headers:
+      x-key: 10d3a9efa38b5eecf6bae19182c4e369
+      content-type: "application/json"
+    value_template: "{{ value_json.data[0].full }}"
+    unit_of_measurement: "%"
+    json_attributes:
+      - gasDayStart
+      - gasInStorage
+      - trend
+      - consumption
+      - injection
+      - withdrawl
